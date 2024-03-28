@@ -31,3 +31,29 @@ body {
     text-wrap: balance;
   }
 }
+
+
+/* Hide scrollbar for IE and Edge */
+.scroll-hide {
+  scrollbar-width: 5px; 
+}
+
+/* Custom scrollbar for WebKit browsers (such as Chrome, Safari, and Opera) */
+.scroll-hide::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+.scroll-hide::-webkit-scrollbar-track {
+  background: #566794; 
+}
+
+/* Handle */
+.scroll-hide::-webkit-scrollbar-thumb {
+  background: #3b39e0; 
+}
+
+/* Handle on hover */
+.scroll-hide::-webkit-scrollbar-thumb:hover {
+  background: #1c56d4; 
+}
