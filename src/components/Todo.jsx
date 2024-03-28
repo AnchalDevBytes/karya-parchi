@@ -1,32 +1,34 @@
-import { addToArchives, deleteTodo, setVisibleModel } from "@/redux/slices/TodoSlice";
+import { ToggleComplete, addToArchives, deleteTodo, setVisibleModel } from "@/redux/slices/TodoSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDeleteOutline } from "react-icons/md";
 
-const Todo = ({todo, handleToggleComplete, deleteHandler}) => {
+const Todo = ({todo, deleteHandler}) => {
     const dispatch = useDispatch();
-    const showModal = useSelector(state => state.todo.isModelVisible)
+    const showModal = useSelector(state => state.todo.isModelVisible);
 
-    const handleConfirmDelete = ({id}) => {
-        dispatch(deleteTodo({id: id}));
-        console.log(todo.id);
-        dispatch(setVisibleModel(false));
-    }
+    const handleToggleComplete = ({completed}) => {
+        dispatch(ToggleComplete({ id: todo.id }));
+        if(!completed) dispatch(setVisibleModel(true))
+    };
 
-    const handleCancel = ({id}) => {
-        dispatch(addToArchives({id: id}));
+    const handleConfirmDelete = () => {
+        dispatch(deleteTodo({id: todo.id}));
         dispatch(setVisibleModel(false));
-    }
+    };
+
+    const handleCancel = () => {
+        dispatch(addToArchives({id: todo.id}));
+        dispatch(setVisibleModel(false));
+    };
 
     return (
         <div className="flex justify-between w-full items-center bg-blue-300 px-5 py-3 rounded-xl">
             <div className="flex gap-4 items-center ">
-                {
-                    (handleToggleComplete !== null) && <input
+                <input
                     type="checkbox"
                     checked={todo.completed}
-                    onChange={()=>handleToggleComplete({id : todo.id, completed : todo.completed})}
+                    onChange={()=>handleToggleComplete({ completed : todo.completed})}
                 />
-                }
                 <span
                     style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
                     className="text-lg font-semibold text-fuchsia-900"
@@ -52,8 +54,8 @@ const Todo = ({todo, handleToggleComplete, deleteHandler}) => {
                 <div className="bg-white p-8 rounded-md shadow-md">
                     <p className="text-black">Do you want to delete this todo?</p>
                     <div className="flex justify-end mt-4">
-                        <button onClick={()=>handleConfirmDelete({id : todo.id})} className="mr-4 px-4 py-2 bg-red-500 text-white rounded-md">Yes</button>
-                        <button onClick={()=>handleCancel({id : todo.id})} className="px-4 py-2 bg-gray-500 text-white rounded-md">No</button>
+                        <button onClick={()=>handleConfirmDelete()} className="mr-4 px-4 py-2 bg-red-500 text-white rounded-md">Yes</button>
+                        <button onClick={()=>handleCancel()} className="px-4 py-2 bg-gray-500 text-white rounded-md">No</button>
                     </div>
                 </div>
             </div>

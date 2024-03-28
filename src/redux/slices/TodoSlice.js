@@ -22,13 +22,11 @@ const TodoSlice = createSlice({
                 msg : action.payload.msg,
                 completed : false
             });
-            // state.todos.sort((a, b) => a.time - b.time);
         },
         ToggleComplete: (state, action) => {
             const todo = state.todos.find((todo) => todo.id === action.payload.id);
             if(todo) {
                 todo.completed = !todo.completed;
-                // state.todos.sort((a, b) => a.time - b.time);
             }
         },
         deleteTodo : (state, action) => {

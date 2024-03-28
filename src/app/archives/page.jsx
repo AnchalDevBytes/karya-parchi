@@ -6,8 +6,6 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 
 const ArchivesPage = () => {
-
-
     const archives = useSelector((state) => state.todo.archives)
     
     const dispatch = useDispatch();
@@ -30,8 +28,7 @@ const ArchivesPage = () => {
                                         <Todo 
                                             key={todo.id} 
                                             todo={todo}
-                                            onDelete={deleteHandler}
-                                            onToggleComplete={null}
+                                            deleteHandler={deleteHandler}
                                         />
                                     ))
                                 }
