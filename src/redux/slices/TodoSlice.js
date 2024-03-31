@@ -4,8 +4,7 @@ const { createSlice, nanoid } = require("@reduxjs/toolkit");
 
 const initialState = {
     todos : [],
-    archives : [],
-    isModelVisible : false
+    archives : []
 }
 
 const sortTodos = (todos) => {
@@ -18,9 +17,6 @@ const TodoSlice = createSlice({
     name:"Todo",
     initialState,
     reducers:{
-        setVisibleModel : (state, action) => {
-            state.isModelVisible = action.payload
-        },
         addTodo : (state, action) => {
             state.todos.unshift({
                 timeOfCreation : generateTime(Date.now()),
@@ -56,5 +52,5 @@ const TodoSlice = createSlice({
     }
 })
 
-export const {addTodo, ToggleComplete, deleteTodo, deleteFromArchive, addToArchives, setVisibleModel} = TodoSlice.actions;
+export const {addTodo, ToggleComplete, deleteTodo, deleteFromArchive, addToArchives} = TodoSlice.actions;
 export default TodoSlice.reducer;
